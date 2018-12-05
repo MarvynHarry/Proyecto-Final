@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+<div class="jumbotron">
+    <h1>Gestor Medical</h1>
+    <img src="~/Models/img/admin.jpg" class="img-responsive" />
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h2>Gestionar Pacientes</h2>
+        <p>
+            Podrá crear pacientes, usando como campo único la cedula del mismo, al
+            agregar un paciente primero pedirá la cedula, si existe traerá los datos básicos
+            del paciente, de lo contrario lo creará.
+
+        </p>
+        <p class="btn btn-info">@Html.ActionLink("Gestionar Usuarios", "Index", "Usuarios")</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Citas</h2>
+        <p>
+            Asignar citas, para un día en específico, hora y duración de la misma.
+            Consultar calendario con las citas pendientes por día
+        </p>
+        <p class="btn btn-info">@Html.ActionLink("Gestionar Consultas", "Index", "consultas")</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Reportes</h2>
+        <p>
+            Reporte de cumpleaños por mes, donde saldrá el nombre, apellido, fecha y
+            teléfono
+            de los pacientes que cumplen años en un mes seleccionado..
+        </p>
+        <p><a class="btn btn-default" href="#">Citas &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Gestiona Consultas</h2>
+        <p>Registrará el pago de la consulta e imprimirá la factura de la misma. </p>
+        <p><a class="btn btn-default" href="#">Ver COnsultas &raquo;</a></p>
+    </div>
+</div>

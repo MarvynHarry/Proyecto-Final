@@ -1,0 +1,65 @@
+﻿@model proyecto_final.Models.paciente
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/Asistente.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>paciente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.apellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_naciemiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_naciemiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_sangre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_sangre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <p class="btn btn-dark"> @Html.ActionLink("Back to List", "Index")</p>   
+        </div>
+    }
+</div>

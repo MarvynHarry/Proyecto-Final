@@ -1,0 +1,90 @@
+﻿@model proyecto_final.Models.Visita
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Visita</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.caso)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.caso)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Procedimientos)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Procedimientos)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Inicio)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Inicio)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Fin)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Fin)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Prioridad)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Prioridad)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.costo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.costo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.StatusENUM)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.StatusENUM)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.paciente1.nombre)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.paciente1.nombre)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

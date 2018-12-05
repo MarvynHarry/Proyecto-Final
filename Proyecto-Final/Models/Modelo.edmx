@@ -1,0 +1,759 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppointmentDiary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SomeImportantKey" Type="bigint" Nullable="false" />
+          <Property Name="DateTimeScheduled" Type="datetime" Nullable="false" />
+          <Property Name="AppointmentLength" Type="int" Nullable="false" />
+          <Property Name="StatusENUM" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cita">
+          <Key>
+            <PropertyRef Name="id_cita" />
+          </Key>
+          <Property Name="id_cita" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedula" Type="bigint" Nullable="false" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+          <Property Name="hora" Type="time" Precision="7" Nullable="false" />
+          <Property Name="duracion" Type="int" Nullable="false" />
+          <Property Name="costo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="paciente" Type="bigint" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="300" />
+          <Property Name="Start" Type="datetime" Nullable="false" />
+          <Property Name="End" Type="datetime" />
+          <Property Name="ThemeColor" Type="nvarchar" MaxLength="10" />
+          <Property Name="IsFullDay" Type="bit" Nullable="false" />
+          <Property Name="costo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="paciente">
+          <Key>
+            <PropertyRef Name="cedula" />
+          </Key>
+          <Property Name="cedula" Type="bigint" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fecha_naciemiento" Type="datetime" Nullable="false" />
+          <Property Name="telefono" Type="bigint" Nullable="false" />
+          <Property Name="tipo_sangre" Type="varchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pago_consulta">
+          <Key>
+            <PropertyRef Name="idpago" />
+          </Key>
+          <Property Name="idpago" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idpaciente" Type="bigint" Nullable="false" />
+          <Property Name="idconsulta" Type="int" Nullable="false" />
+          <Property Name="seguro" Type="bit" Nullable="false" />
+          <Property Name="recibido" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="devuelto" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="recibido_por" Type="int" Nullable="false" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="recetacita">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="paciente" Type="bigint" Nullable="false" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+          <Property Name="cita" Type="int" Nullable="false" />
+          <Property Name="medicamentos" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="observaciones" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="recetavisita">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="paciente" Type="bigint" Nullable="false" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+          <Property Name="cita" Type="int" Nullable="false" />
+          <Property Name="medicamentos" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="observaciones" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="20" />
+          <Property Name="clave" Type="varchar" MaxLength="25" />
+          <Property Name="tipo" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Visita">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="paciente" Type="bigint" Nullable="false" />
+          <Property Name="caso" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Procedimientos" Type="nvarchar" MaxLength="300" />
+          <Property Name="Inicio" Type="datetime" Nullable="false" />
+          <Property Name="Fin" Type="datetime" />
+          <Property Name="Prioridad" Type="nvarchar" MaxLength="10" />
+          <Property Name="costo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Appointme__SomeI__2B0A656D">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+          <End Role="AppointmentDiary" Type="Self.AppointmentDiary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="AppointmentDiary">
+              <PropertyRef Name="SomeImportantKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cita__cedula__276EDEB3">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+          <End Role="cita" Type="Self.cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="cita">
+              <PropertyRef Name="cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Events__paciente__02FC7413">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pago_cons__idcon__52593CB8">
+          <End Role="cita" Type="Self.cita" Multiplicity="1" />
+          <End Role="pago_consulta" Type="Self.pago_consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cita">
+              <PropertyRef Name="id_cita" />
+            </Principal>
+            <Dependent Role="pago_consulta">
+              <PropertyRef Name="idconsulta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pago_cons__idpac__5165187F">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+          <End Role="pago_consulta" Type="Self.pago_consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="pago_consulta">
+              <PropertyRef Name="idpaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pago_cons__recib__534D60F1">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="pago_consulta" Type="Self.pago_consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pago_consulta">
+              <PropertyRef Name="recibido_por" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__recetacit__pacie__2739D489">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+          <End Role="recetacita" Type="Self.recetacita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="recetacita">
+              <PropertyRef Name="paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__recetacita__cita__282DF8C2">
+          <End Role="Visita" Type="Self.Visita" Multiplicity="1" />
+          <End Role="recetacita" Type="Self.recetacita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visita">
+              <PropertyRef Name="EventID" />
+            </Principal>
+            <Dependent Role="recetacita">
+              <PropertyRef Name="cita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__recetavis__pacie__2180FB33">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+          <End Role="recetavisita" Type="Self.recetavisita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="recetavisita">
+              <PropertyRef Name="paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__recetavisi__cita__245D67DE">
+          <End Role="Visita" Type="Self.Visita" Multiplicity="1" />
+          <End Role="recetavisita" Type="Self.recetavisita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visita">
+              <PropertyRef Name="EventID" />
+            </Principal>
+            <Dependent Role="recetavisita">
+              <PropertyRef Name="cita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Visita__paciente__236943A5">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+          <End Role="Visita" Type="Self.Visita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="Visita">
+              <PropertyRef Name="paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseModelStoreContainer">
+          <EntitySet Name="AppointmentDiary" EntityType="Self.AppointmentDiary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cita" EntityType="Self.cita" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="paciente" EntityType="Self.paciente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pago_consulta" EntityType="Self.pago_consulta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="recetacita" EntityType="Self.recetacita" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="recetavisita" EntityType="Self.recetavisita" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Visita" EntityType="Self.Visita" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Appointme__SomeI__2B0A656D" Association="Self.FK__Appointme__SomeI__2B0A656D">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="AppointmentDiary" EntitySet="AppointmentDiary" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cita__cedula__276EDEB3" Association="Self.FK__cita__cedula__276EDEB3">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="cita" EntitySet="cita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Events__paciente__02FC7413" Association="Self.FK__Events__paciente__02FC7413">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pago_cons__idcon__52593CB8" Association="Self.FK__pago_cons__idcon__52593CB8">
+            <End Role="cita" EntitySet="cita" />
+            <End Role="pago_consulta" EntitySet="pago_consulta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pago_cons__idpac__5165187F" Association="Self.FK__pago_cons__idpac__5165187F">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="pago_consulta" EntitySet="pago_consulta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pago_cons__recib__534D60F1" Association="Self.FK__pago_cons__recib__534D60F1">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="pago_consulta" EntitySet="pago_consulta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__recetacit__pacie__2739D489" Association="Self.FK__recetacit__pacie__2739D489">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="recetacita" EntitySet="recetacita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__recetacita__cita__282DF8C2" Association="Self.FK__recetacita__cita__282DF8C2">
+            <End Role="Visita" EntitySet="Visita" />
+            <End Role="recetacita" EntitySet="recetacita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__recetavis__pacie__2180FB33" Association="Self.FK__recetavis__pacie__2180FB33">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="recetavisita" EntitySet="recetavisita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__recetavisi__cita__245D67DE" Association="Self.FK__recetavisi__cita__245D67DE">
+            <End Role="Visita" EntitySet="Visita" />
+            <End Role="recetavisita" EntitySet="recetavisita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Visita__paciente__236943A5" Association="Self.FK__Visita__paciente__236943A5">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="Visita" EntitySet="Visita" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AppointmentDiary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SomeImportantKey" Type="Int64" Nullable="false" />
+          <Property Name="DateTimeScheduled" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AppointmentLength" Type="Int32" Nullable="false" />
+          <Property Name="StatusENUM" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="paciente" Relationship="Self.FK__Appointme__SomeI__2B0A656D" FromRole="AppointmentDiary" ToRole="paciente" />
+        </EntityType>
+        <EntityType Name="cita">
+          <Key>
+            <PropertyRef Name="id_cita" />
+          </Key>
+          <Property Name="id_cita" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedula" Type="Int64" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hora" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="duracion" Type="Int32" Nullable="false" />
+          <Property Name="costo" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="paciente" Relationship="Self.FK__cita__cedula__276EDEB3" FromRole="cita" ToRole="paciente" />
+          <NavigationProperty Name="pago_consulta" Relationship="Self.FK__pago_cons__idcon__52593CB8" FromRole="cita" ToRole="pago_consulta" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="paciente" Type="Int64" Nullable="false" />
+          <Property Name="Subject" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Start" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="End" Type="DateTime" Precision="3" />
+          <Property Name="ThemeColor" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IsFullDay" Type="Boolean" Nullable="false" />
+          <Property Name="costo" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="paciente1" Relationship="Self.FK__Events__paciente__02FC7413" FromRole="Events" ToRole="paciente" />
+        </EntityType>
+        <EntityType Name="paciente">
+          <Key>
+            <PropertyRef Name="cedula" />
+          </Key>
+          <Property Name="cedula" Type="Int64" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_naciemiento" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="telefono" Type="Int64" Nullable="false" />
+          <Property Name="tipo_sangre" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AppointmentDiary" Relationship="Self.FK__Appointme__SomeI__2B0A656D" FromRole="paciente" ToRole="AppointmentDiary" />
+          <NavigationProperty Name="cita" Relationship="Self.FK__cita__cedula__276EDEB3" FromRole="paciente" ToRole="cita" />
+          <NavigationProperty Name="Events" Relationship="Self.FK__Events__paciente__02FC7413" FromRole="paciente" ToRole="Events" />
+          <NavigationProperty Name="pago_consulta" Relationship="Self.FK__pago_cons__idpac__5165187F" FromRole="paciente" ToRole="pago_consulta" />
+          <NavigationProperty Name="recetacita" Relationship="Self.FK__recetacit__pacie__2739D489" FromRole="paciente" ToRole="recetacita" />
+          <NavigationProperty Name="recetavisita" Relationship="Self.FK__recetavis__pacie__2180FB33" FromRole="paciente" ToRole="recetavisita" />
+          <NavigationProperty Name="Visita" Relationship="Self.FK__Visita__paciente__236943A5" FromRole="paciente" ToRole="Visita" />
+        </EntityType>
+        <EntityType Name="pago_consulta">
+          <Key>
+            <PropertyRef Name="idpago" />
+          </Key>
+          <Property Name="idpago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idpaciente" Type="Int64" Nullable="false" />
+          <Property Name="idconsulta" Type="Int32" Nullable="false" />
+          <Property Name="seguro" Type="Boolean" Nullable="false" />
+          <Property Name="recibido" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="devuelto" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="recibido_por" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="cita" Relationship="Self.FK__pago_cons__idcon__52593CB8" FromRole="pago_consulta" ToRole="cita" />
+          <NavigationProperty Name="paciente" Relationship="Self.FK__pago_cons__idpac__5165187F" FromRole="pago_consulta" ToRole="paciente" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__pago_cons__recib__534D60F1" FromRole="pago_consulta" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="recetacita">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="paciente" Type="Int64" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cita" Type="Int32" Nullable="false" />
+          <Property Name="medicamentos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="observaciones" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="paciente1" Relationship="Self.FK__recetacit__pacie__2739D489" FromRole="recetacita" ToRole="paciente" />
+          <NavigationProperty Name="Visita" Relationship="Self.FK__recetacita__cita__282DF8C2" FromRole="recetacita" ToRole="Visita" />
+        </EntityType>
+        <EntityType Name="recetavisita">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="paciente" Type="Int64" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cita" Type="Int32" Nullable="false" />
+          <Property Name="medicamentos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="observaciones" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="paciente1" Relationship="Self.FK__recetavis__pacie__2180FB33" FromRole="recetavisita" ToRole="paciente" />
+          <NavigationProperty Name="Visita" Relationship="Self.FK__recetavisi__cita__245D67DE" FromRole="recetavisita" ToRole="Visita" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="clave" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="pago_consulta" Relationship="Self.FK__pago_cons__recib__534D60F1" FromRole="Usuarios" ToRole="pago_consulta" />
+        </EntityType>
+        <EntityType Name="Visita">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="paciente" Type="Int64" Nullable="false" />
+          <Property Name="caso" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Procedimientos" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Inicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fin" Type="DateTime" Precision="3" />
+          <Property Name="Prioridad" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="costo" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="paciente1" Relationship="Self.FK__Visita__paciente__236943A5" FromRole="Visita" ToRole="paciente" />
+          <NavigationProperty Name="recetacita" Relationship="Self.FK__recetacita__cita__282DF8C2" FromRole="Visita" ToRole="recetacita" />
+          <NavigationProperty Name="recetavisita" Relationship="Self.FK__recetavisi__cita__245D67DE" FromRole="Visita" ToRole="recetavisita" />
+        </EntityType>
+        <Association Name="FK__Appointme__SomeI__2B0A656D">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+          <End Role="AppointmentDiary" Type="Self.AppointmentDiary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="AppointmentDiary">
+              <PropertyRef Name="SomeImportantKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cita__cedula__276EDEB3">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+          <End Role="cita" Type="Self.cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="cita">
+              <PropertyRef Name="cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pago_cons__idcon__52593CB8">
+          <End Role="cita" Type="Self.cita" Multiplicity="1" />
+          <End Role="pago_consulta" Type="Self.pago_consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cita">
+              <PropertyRef Name="id_cita" />
+            </Principal>
+            <Dependent Role="pago_consulta">
+              <PropertyRef Name="idconsulta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Events__paciente__02FC7413">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pago_cons__idpac__5165187F">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+          <End Role="pago_consulta" Type="Self.pago_consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="pago_consulta">
+              <PropertyRef Name="idpaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__recetacit__pacie__2739D489">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+          <End Role="recetacita" Type="Self.recetacita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="recetacita">
+              <PropertyRef Name="paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__recetavis__pacie__2180FB33">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+          <End Role="recetavisita" Type="Self.recetavisita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="recetavisita">
+              <PropertyRef Name="paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Visita__paciente__236943A5">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+          <End Role="Visita" Type="Self.Visita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="Visita">
+              <PropertyRef Name="paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pago_cons__recib__534D60F1">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="pago_consulta" Type="Self.pago_consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pago_consulta">
+              <PropertyRef Name="recibido_por" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__recetacita__cita__282DF8C2">
+          <End Role="Visita" Type="Self.Visita" Multiplicity="1" />
+          <End Role="recetacita" Type="Self.recetacita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visita">
+              <PropertyRef Name="EventID" />
+            </Principal>
+            <Dependent Role="recetacita">
+              <PropertyRef Name="cita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__recetavisi__cita__245D67DE">
+          <End Role="Visita" Type="Self.Visita" Multiplicity="1" />
+          <End Role="recetavisita" Type="Self.recetavisita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visita">
+              <PropertyRef Name="EventID" />
+            </Principal>
+            <Dependent Role="recetavisita">
+              <PropertyRef Name="cita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseEntities6" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AppointmentDiary" EntityType="Self.AppointmentDiary" />
+          <EntitySet Name="cita" EntityType="Self.cita" />
+          <EntitySet Name="Events" EntityType="Self.Events" />
+          <EntitySet Name="paciente" EntityType="Self.paciente" />
+          <EntitySet Name="pago_consulta" EntityType="Self.pago_consulta" />
+          <EntitySet Name="recetacita" EntityType="Self.recetacita" />
+          <EntitySet Name="recetavisita" EntityType="Self.recetavisita" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <EntitySet Name="Visita" EntityType="Self.Visita" />
+          <AssociationSet Name="FK__Appointme__SomeI__2B0A656D" Association="Self.FK__Appointme__SomeI__2B0A656D">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="AppointmentDiary" EntitySet="AppointmentDiary" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cita__cedula__276EDEB3" Association="Self.FK__cita__cedula__276EDEB3">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="cita" EntitySet="cita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pago_cons__idcon__52593CB8" Association="Self.FK__pago_cons__idcon__52593CB8">
+            <End Role="cita" EntitySet="cita" />
+            <End Role="pago_consulta" EntitySet="pago_consulta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Events__paciente__02FC7413" Association="Self.FK__Events__paciente__02FC7413">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pago_cons__idpac__5165187F" Association="Self.FK__pago_cons__idpac__5165187F">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="pago_consulta" EntitySet="pago_consulta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__recetacit__pacie__2739D489" Association="Self.FK__recetacit__pacie__2739D489">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="recetacita" EntitySet="recetacita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__recetavis__pacie__2180FB33" Association="Self.FK__recetavis__pacie__2180FB33">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="recetavisita" EntitySet="recetavisita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Visita__paciente__236943A5" Association="Self.FK__Visita__paciente__236943A5">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="Visita" EntitySet="Visita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pago_cons__recib__534D60F1" Association="Self.FK__pago_cons__recib__534D60F1">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="pago_consulta" EntitySet="pago_consulta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__recetacita__cita__282DF8C2" Association="Self.FK__recetacita__cita__282DF8C2">
+            <End Role="Visita" EntitySet="Visita" />
+            <End Role="recetacita" EntitySet="recetacita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__recetavisi__cita__245D67DE" Association="Self.FK__recetavisi__cita__245D67DE">
+            <End Role="Visita" EntitySet="Visita" />
+            <End Role="recetavisita" EntitySet="recetavisita" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseEntities6">
+          <EntitySetMapping Name="AppointmentDiary">
+            <EntityTypeMapping TypeName="DatabaseModel.AppointmentDiary">
+              <MappingFragment StoreEntitySet="AppointmentDiary">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="SomeImportantKey" ColumnName="SomeImportantKey" />
+                <ScalarProperty Name="DateTimeScheduled" ColumnName="DateTimeScheduled" />
+                <ScalarProperty Name="AppointmentLength" ColumnName="AppointmentLength" />
+                <ScalarProperty Name="StatusENUM" ColumnName="StatusENUM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cita">
+            <EntityTypeMapping TypeName="DatabaseModel.cita">
+              <MappingFragment StoreEntitySet="cita">
+                <ScalarProperty Name="id_cita" ColumnName="id_cita" />
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="hora" ColumnName="hora" />
+                <ScalarProperty Name="duracion" ColumnName="duracion" />
+                <ScalarProperty Name="costo" ColumnName="costo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="DatabaseModel.Events">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="paciente" ColumnName="paciente" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="ThemeColor" ColumnName="ThemeColor" />
+                <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
+                <ScalarProperty Name="costo" ColumnName="costo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="paciente">
+            <EntityTypeMapping TypeName="DatabaseModel.paciente">
+              <MappingFragment StoreEntitySet="paciente">
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="fecha_naciemiento" ColumnName="fecha_naciemiento" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="tipo_sangre" ColumnName="tipo_sangre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pago_consulta">
+            <EntityTypeMapping TypeName="DatabaseModel.pago_consulta">
+              <MappingFragment StoreEntitySet="pago_consulta">
+                <ScalarProperty Name="idpago" ColumnName="idpago" />
+                <ScalarProperty Name="idpaciente" ColumnName="idpaciente" />
+                <ScalarProperty Name="idconsulta" ColumnName="idconsulta" />
+                <ScalarProperty Name="seguro" ColumnName="seguro" />
+                <ScalarProperty Name="recibido" ColumnName="recibido" />
+                <ScalarProperty Name="devuelto" ColumnName="devuelto" />
+                <ScalarProperty Name="recibido_por" ColumnName="recibido_por" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="recetacita">
+            <EntityTypeMapping TypeName="DatabaseModel.recetacita">
+              <MappingFragment StoreEntitySet="recetacita">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="paciente" ColumnName="paciente" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="cita" ColumnName="cita" />
+                <ScalarProperty Name="medicamentos" ColumnName="medicamentos" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="recetavisita">
+            <EntityTypeMapping TypeName="DatabaseModel.recetavisita">
+              <MappingFragment StoreEntitySet="recetavisita">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="paciente" ColumnName="paciente" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="cita" ColumnName="cita" />
+                <ScalarProperty Name="medicamentos" ColumnName="medicamentos" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="DatabaseModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Visita">
+            <EntityTypeMapping TypeName="DatabaseModel.Visita">
+              <MappingFragment StoreEntitySet="Visita">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="paciente" ColumnName="paciente" />
+                <ScalarProperty Name="caso" ColumnName="caso" />
+                <ScalarProperty Name="Procedimientos" ColumnName="Procedimientos" />
+                <ScalarProperty Name="Inicio" ColumnName="Inicio" />
+                <ScalarProperty Name="Fin" ColumnName="Fin" />
+                <ScalarProperty Name="Prioridad" ColumnName="Prioridad" />
+                <ScalarProperty Name="costo" ColumnName="costo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

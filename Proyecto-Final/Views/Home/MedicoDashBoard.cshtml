@@ -1,0 +1,45 @@
+﻿@Scripts.Render("~/MyBundle")
+@{
+
+        ViewBag.Title = "MedicoDashBoard";
+        Layout = "~/Views/Shared/Medico.cshtml";
+    }
+    <div class="jumbotron">
+        <h1>Gestor Medical</h1>
+        <img src="~/Models/img/medic.jpg" class="img-responsive" />
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Gestionar Pacientes</h2>
+            <p>
+                Podrá registrar un evento de visita a un paciente seleccionado, asi como ver las
+                visitas anteriores. Para cada visita se registrarán los campos:
+                Fecha, Motivo, Comentario, Receta de medicamentos, fecha de próxima visita.
+
+            </p>
+            <p class="btn btn-info">@Html.ActionLink("Gestionar Eventos", "Index", "Events")</p>
+        </div>
+        <div class="col-md-4">
+            <h2>Citas</h2>
+            <p>
+                El medico podrá imprimir la hoja de RECETA de medicamentos, generada en la
+                visita.
+
+            </p>
+            <p class="btn btn-info">@Html.ActionLink("imprimir recetas", "Index", "Events")</p>
+        </div>
+        <div class="col-md-4">
+            <h2>Reportes</h2>
+            <p>
+                Reporte de cumpleaños por mes, donde saldrá el nombre, apellido, fecha y
+                teléfono
+                de los pacientes que cumplen años en un mes seleccionado..
+            </p>
+            <p><a class="btn btn-default" href="#">Citas &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Calendario</h2>
+            <p>Puede consultar el calendario de citas</p>
+            <p class="btn btn-info">@Html.ActionLink("Calendario", "Index", "Calendar")</p>
+        </div>
+    </div>

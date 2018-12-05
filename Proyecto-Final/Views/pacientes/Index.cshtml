@@ -1,0 +1,81 @@
+﻿@model IEnumerable<proyecto_final.Models.paciente>
+@{ 
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Asistente.cshtml";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading" style="background:#2C3E50; color:#ffffff;"><h2 style="text-align:center; font-family:Arial; font-weight:700;">Pacientes</h2></div>
+    <div class="form-group ">
+        @using (@Html.BeginForm("Index", "pacientes", FormMethod.Get))
+        {
+            <b>Buscar Por:</b><br /><br />
+
+            @Html.RadioButton("searchBy", "nombre", true, new { @class = "radio-inline" }) <text>Nombre</text>
+            @Html.RadioButton("searchBy", "apellido", new { @class = "radio-inline" }) <text>Apellido</text>
+            @Html.RadioButton("searchBy", "sangre", new { @class = "radio-inline" }) <text>Sangre</text><br /><br />
+            <div>
+
+            @Html.TextBox("search", "buscar", new { @class = "form-control" })<br />
+        <input type="submit" value="search" class="btn btn-sm form-actions" /></div>
+        }
+    </div>
+</div>
+
+<p class="btn btn-success" >
+    @Html.ActionLink("Create New", "Create")
+</p>
+<hr />
+<table class="table table-bordered table-responsive table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.cedula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha_naciemiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telefono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tipo_sangre)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.cedula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha_naciemiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telefono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tipo_sangre)
+        </td>
+        <td>
+            <p class="btn btn-warning ">  @Html.ActionLink("Editar", "Edit", new { id = item.cedula })</p>
+            <p class="btn btn-default">@Html.ActionLink("Detales", "Details", new { id = item.cedula }) </p>
+            <p class="btn btn-danger ">@Html.ActionLink("Borrar", "Delete", new { id = item.cedula })</p>
+</td>
+    </tr>
+    }
+
+</table>

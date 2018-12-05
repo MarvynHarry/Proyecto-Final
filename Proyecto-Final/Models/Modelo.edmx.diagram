@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="16e96feb729d40548248848b58190835" Name="Diagram1">
+        <EntityTypeShape EntityType="DatabaseModel.AppointmentDiary" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.cita" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Events" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.paciente" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.pago_consulta" Width="1.5" PointX="5.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.recetacita" Width="1.5" PointX="5.25" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.recetavisita" Width="1.5" PointX="8.25" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Usuarios" Width="1.5" PointX="3" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Visita" Width="1.5" PointX="3" PointY="22.125" IsExpanded="true" />
+        <AssociationConnector Association="DatabaseModel.FK__Appointme__SomeI__2B0A656D" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__cita__cedula__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__pago_cons__idcon__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__Events__paciente__02FC7413" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__pago_cons__idpac__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__recetacit__pacie__2739D489" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__recetavis__pacie__2180FB33" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__Visita__paciente__236943A5" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__pago_cons__recib__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__recetacita__cita__282DF8C2" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__recetavisi__cita__245D67DE" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

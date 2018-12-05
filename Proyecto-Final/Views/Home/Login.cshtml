@@ -1,0 +1,46 @@
+﻿@{
+    Layout = null;
+}
+@model proyecto_final.Models.Usuarios
+@{
+    ViewBag.Title = "Login";
+}
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    <fieldset>
+        <legend>Iniciar Session</legend>
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @if (@ViewBag.Message != null)
+        {
+            <div style="border: 1px solid red">
+                @ViewBag.Message
+            </div>
+        }
+        <table>
+            <tr>
+                <td>@Html.LabelFor(a => a.Nombre)</td>
+                <td>@Html.TextBoxFor(a => a.Nombre)</td>
+                <td>@Html.ValidationMessageFor(a => a.Nombre)</td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.clave)
+                </td>
+                <td>
+                    @Html.PasswordFor(a => a.clave)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(a => a.clave)
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Login" />
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </fieldset>
+}

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<proyecto_final.Models.cita>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Asistente.cshtml";
+}
+<div class="panel panel-default">
+    <div class="panel-heading" style="background:#2C3E50; color:#ffffff;"><h2 style="text-align:center; font-family:Arial; font-weight:700;">Pacientes</h2></div>
+    <div class="form-group ">
+        @using (@Html.BeginForm("Index", "citas", FormMethod.Get))
+        {
+            <b>Buscar Por:</b><br /><br />
+
+            @Html.RadioButton("searchBy", "fecha", true, new { @class = "radio-inline" }) <text>Nombre</text>
+            @Html.RadioButton("searchBy", "costo", new { @class = "radio-inline" }) <text>Costo</text>
+            @Html.RadioButton("searchBy", "cedula", new { @class = "radio-inline" }) <text>Cedula</text><br /><br />
+            <div>
+
+                @Html.TextBox("search", "buscar", new { @class = "form-control" })<br />
+                <input type="submit" value="search" class="btn btn-sm form-actions" />
+            </div>
+        }
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hora)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.duracion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.costo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.paciente.nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.hora)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.duracion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.costo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.paciente.nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_cita }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_cita }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_cita })
+        </td>
+    </tr>
+}
+
+</table>

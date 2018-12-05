@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="cita">
+    <Key>
+      <PropertyRef Name="id_cita" />
+    </Key>
+    <Property Name="id_cita" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cedula" Type="Int64" Nullable="false" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="hora" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="duracion" Type="Int32" Nullable="false" />
+    <Property Name="costo" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <NavigationProperty Name="paciente" Relationship="Self.FK__cita__cedula__276EDEB3" FromRole="cita" ToRole="paciente" />
+  </EntityType>
+  <EntityType Name="paciente">
+    <Key>
+      <PropertyRef Name="cedula" />
+    </Key>
+    <Property Name="cedula" Type="Int64" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_naciemiento" Type="DateTime" Precision="0" />
+    <Property Name="telefono" Type="Int64" />
+    <Property Name="tipo_sangre" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="cita" Relationship="Self.FK__cita__cedula__276EDEB3" FromRole="paciente" ToRole="cita" />
+    <NavigationProperty Name="visita" Relationship="Self.FK__visita__cedula__2A4B4B5E" FromRole="paciente" ToRole="visita" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="clave" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="visita">
+    <Key>
+      <PropertyRef Name="id_cita" />
+    </Key>
+    <Property Name="id_cita" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cedula" Type="Int64" Nullable="false" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="hora" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="duracion" Type="Int32" Nullable="false" />
+    <Property Name="costo" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <NavigationProperty Name="paciente" Relationship="Self.FK__visita__cedula__2A4B4B5E" FromRole="visita" ToRole="paciente" />
+  </EntityType>
+  <Association Name="FK__cita__cedula__276EDEB3">
+    <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+    <End Role="cita" Type="Self.cita" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="paciente">
+        <PropertyRef Name="cedula" />
+      </Principal>
+      <Dependent Role="cita">
+        <PropertyRef Name="cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__visita__cedula__2A4B4B5E">
+    <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+    <End Role="visita" Type="Self.visita" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="paciente">
+        <PropertyRef Name="cedula" />
+      </Principal>
+      <Dependent Role="visita">
+        <PropertyRef Name="cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="cita" EntityType="Self.cita" />
+    <EntitySet Name="paciente" EntityType="Self.paciente" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+    <EntitySet Name="visita" EntityType="Self.visita" />
+    <AssociationSet Name="FK__cita__cedula__276EDEB3" Association="Self.FK__cita__cedula__276EDEB3">
+      <End Role="paciente" EntitySet="paciente" />
+      <End Role="cita" EntitySet="cita" />
+    </AssociationSet>
+    <AssociationSet Name="FK__visita__cedula__2A4B4B5E" Association="Self.FK__visita__cedula__2A4B4B5E">
+      <End Role="paciente" EntitySet="paciente" />
+      <End Role="visita" EntitySet="visita" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

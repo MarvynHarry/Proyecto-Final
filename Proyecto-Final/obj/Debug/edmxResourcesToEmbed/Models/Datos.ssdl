@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="cita">
+    <Key>
+      <PropertyRef Name="id_cita" />
+    </Key>
+    <Property Name="id_cita" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cedula" Type="bigint" Nullable="false" />
+    <Property Name="fecha" Type="date" Nullable="false" />
+    <Property Name="hora" Type="time" Precision="7" Nullable="false" />
+    <Property Name="duracion" Type="int" Nullable="false" />
+    <Property Name="costo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="paciente">
+    <Key>
+      <PropertyRef Name="cedula" />
+    </Key>
+    <Property Name="cedula" Type="bigint" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="apellido" Type="varchar" MaxLength="50" />
+    <Property Name="fecha_naciemiento" Type="date" />
+    <Property Name="telefono" Type="bigint" />
+    <Property Name="tipo_sangre" Type="varchar" MaxLength="3" />
+  </EntityType>
+  <EntityType Name="pago_consulta">
+    <Key>
+      <PropertyRef Name="idpago" />
+    </Key>
+    <Property Name="idpago" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idpaciente" Type="bigint" Nullable="false" />
+    <Property Name="idconsulta" Type="int" Nullable="false" />
+    <Property Name="seguro" Type="bit" Nullable="false" />
+    <Property Name="recibido" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="devuelto" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="recibido_por" Type="int" Nullable="false" />
+    <Property Name="fecha" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="20" />
+    <Property Name="clave" Type="varchar" MaxLength="25" />
+    <Property Name="tipo" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <Association Name="FK__cita__cedula__276EDEB3">
+    <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+    <End Role="cita" Type="Self.cita" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="paciente">
+        <PropertyRef Name="cedula" />
+      </Principal>
+      <Dependent Role="cita">
+        <PropertyRef Name="cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__pago_cons__idcon__52593CB8">
+    <End Role="cita" Type="Self.cita" Multiplicity="1" />
+    <End Role="pago_consulta" Type="Self.pago_consulta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cita">
+        <PropertyRef Name="id_cita" />
+      </Principal>
+      <Dependent Role="pago_consulta">
+        <PropertyRef Name="idconsulta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__pago_cons__idpac__5165187F">
+    <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+    <End Role="pago_consulta" Type="Self.pago_consulta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="paciente">
+        <PropertyRef Name="cedula" />
+      </Principal>
+      <Dependent Role="pago_consulta">
+        <PropertyRef Name="idpaciente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__pago_cons__recib__534D60F1">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="pago_consulta" Type="Self.pago_consulta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="pago_consulta">
+        <PropertyRef Name="recibido_por" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DatabaseModelStoreContainer">
+    <EntitySet Name="cita" EntityType="Self.cita" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="paciente" EntityType="Self.paciente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pago_consulta" EntityType="Self.pago_consulta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__cita__cedula__276EDEB3" Association="Self.FK__cita__cedula__276EDEB3">
+      <End Role="paciente" EntitySet="paciente" />
+      <End Role="cita" EntitySet="cita" />
+    </AssociationSet>
+    <AssociationSet Name="FK__pago_cons__idcon__52593CB8" Association="Self.FK__pago_cons__idcon__52593CB8">
+      <End Role="cita" EntitySet="cita" />
+      <End Role="pago_consulta" EntitySet="pago_consulta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__pago_cons__idpac__5165187F" Association="Self.FK__pago_cons__idpac__5165187F">
+      <End Role="paciente" EntitySet="paciente" />
+      <End Role="pago_consulta" EntitySet="pago_consulta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__pago_cons__recib__534D60F1" Association="Self.FK__pago_cons__recib__534D60F1">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="pago_consulta" EntitySet="pago_consulta" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
