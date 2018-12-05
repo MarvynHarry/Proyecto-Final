@@ -1025,6 +1025,7 @@
     <Content Include="Scripts\theme-chooser.js" />
     <None Include="Scripts\_references.js" />
     <Content Include="Style\login.css" />
+    <Content Include="Style\Style.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

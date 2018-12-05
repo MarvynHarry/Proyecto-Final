@@ -1,0 +1,16 @@
+﻿html {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+.btn {
+    background: black;
+    color:aqua;
+.container.body-content{
+    margin-top: 50px;
+    padding: 20px;
+}
