@@ -1029,6 +1029,7 @@
     <Content Include="Scripts\moments.js" />
     <Content Include="Scripts\theme-chooser.js" />
     <None Include="Scripts\_references.js" />
+    <Content Include="Style\login.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

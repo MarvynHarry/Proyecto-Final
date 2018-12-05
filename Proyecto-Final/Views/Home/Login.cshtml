@@ -7,40 +7,44 @@
 }
 @using (Html.BeginForm("Login", "Home", FormMethod.Post))
 {
-    <fieldset>
-        <legend>Iniciar Session</legend>
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
-        @if (@ViewBag.Message != null)
-        {
-            <div style="border: 1px solid red">
-                @ViewBag.Message
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Inicio de seción</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link rel="stylesheet" href="~/Style/login.css">
+    </head>
+    <body>
+        <div class="card">
+            <div class="card-content">
+                <form class="white">
+                    <h1>Iniciar Sesión</h1>
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @if (@ViewBag.Message != null)
+                    {
+                        <div style="border: 1px solid red">
+                            @ViewBag.Message
+                        </div>
+                    }
+                    <div class="input-field">
+                        @Html.LabelFor(a => a.Nombre)
+                        @Html.TextBoxFor(a => a.Nombre)
+                        @Html.ValidationMessageFor(a => a.Nombre)
+                    </div>
+                    <div class="input-field">
+                        @Html.LabelFor(a => a.clave)
+                        @Html.PasswordFor(a => a.clave)
+                        @Html.ValidationMessageFor(a => a.clave)
+                    </div>
+                    <div class="input-field">
+                        <input type="submit" value="Login" class="btn #1976d2 blue darken-2" />
+                    </div>
+                </form>
             </div>
-        }
-        <table>
-            <tr>
-                <td>@Html.LabelFor(a => a.Nombre)</td>
-                <td>@Html.TextBoxFor(a => a.Nombre)</td>
-                <td>@Html.ValidationMessageFor(a => a.Nombre)</td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.LabelFor(a => a.clave)
-                </td>
-                <td>
-                    @Html.PasswordFor(a => a.clave)
-                </td>
-                <td>
-                    @Html.ValidationMessageFor(a => a.clave)
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <input type="submit" value="Login" />
-                </td>
-                <td></td>
-            </tr>
-        </table>
-    </fieldset>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
 }
