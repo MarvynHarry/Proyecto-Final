@@ -16,9 +16,19 @@ namespace proyecto_final.Controllers
         private DatabaseEntities db = new DatabaseEntities();
 
         // GET: consultas
-        public ActionResult Index()
+        public ActionResult Index(string searchBy, string search)
         {
-            return View(db.consulta.ToList());
+            if (searchBy == "area")
+            {
+                return View(db.consulta.Where(x => x.area.Contains(search) || search == null).ToList());
+            }
+            if (searchBy == "costo")
+            {
+                return View(db.consulta.Where(x => x.costo.Equals(search) || search == null).ToList());
+            }
+
+
+            else { return View(db.consulta.ToList()); }
         }
 
         // GET: consultas/Details/5

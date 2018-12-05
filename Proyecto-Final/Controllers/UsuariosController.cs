@@ -16,9 +16,22 @@ namespace proyecto_final.Controllers
         private DatabaseEntities db = new DatabaseEntities();
 
         // GET: Usuarios
-        public ActionResult Index()
+        public ActionResult Index(string searchBy, string search, string search1)
         {
-            return View(db.Usuarios.ToList());
+            if (searchBy == "nombre")
+            {
+                return View(db.Usuarios.Where(x => x.Nombre.Contains(search) || search == null).ToList());
+            }
+            if (searchBy == "clave")
+            {
+                return View(db.Usuarios.Where(x => x.clave.Contains(search) || search == null).ToList());
+            }
+            if (searchBy == "tipo")
+            {
+                return View(db.Usuarios.Where(x => x.tipo.Equals(search1) || search == null).ToList());
+            }
+
+            else { return View(db.Usuarios.ToList()); }
         }
 
         // GET: Usuarios/Details/5

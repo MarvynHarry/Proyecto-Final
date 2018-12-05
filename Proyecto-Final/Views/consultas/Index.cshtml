@@ -5,7 +5,24 @@
     Layout = "~/Views/Shared/_layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="panel panel-default">
+    <div class="panel-heading" style="background:#2C3E50; color:#ffffff;"><h2 style="text-align:center; font-family:Arial; font-weight:700;">Consultas</h2></div>
+    <div class="form-group ">
+        @using (@Html.BeginForm("Index", "Visitas", FormMethod.Get))
+        {
+            <b>Buscar Por:</b><br /><br />
+
+            @Html.RadioButton("searchBy", "area", true, new { @class = "radio-inline" }) <text>Area</text>
+            @Html.RadioButton("searchBy", "costo", new { @class = "radio-inline" }) <text>Costo</text>
+           <br /><br />
+            <div>
+
+                @Html.TextBox("search", "buscar", new { @class = "form-control" })<br />
+                <input type="submit" value="search" class="btn btn-sm form-actions" />
+            </div>
+        }
+    </div>
+</div>
 
 <p>
     @Html.ActionLink("Create New", "Create")

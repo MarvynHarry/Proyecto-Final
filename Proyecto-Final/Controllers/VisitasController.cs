@@ -15,10 +15,22 @@ namespace proyecto_final.Controllers
         private DatabaseEntities db = new DatabaseEntities();
 
         // GET: Visitas
-        public ActionResult Index()
+        public ActionResult Index(string searchBy, string search)
         {
-            var visita = db.Visita.Include(v => v.paciente1);
-            return View(visita.ToList());
+            if (searchBy == "caso")
+            {
+                return View(db.Visita.Where(x => x.caso.Contains(search) || search == null).ToList());
+            }
+            if (searchBy == "costo")
+            {
+                return View(db.Visita.Where(x => x.costo.Equals(search) || search == null).ToList());
+            }
+            if (searchBy == "paciente")
+            {
+                return View(db.Visita.Where(x => x.paciente.Equals(search) || search == null).ToList());
+            }
+
+            else { return View(db.Visita.ToList()); }
         }
 
         // GET: Visitas/Details/5

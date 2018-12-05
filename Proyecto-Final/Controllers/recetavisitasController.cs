@@ -16,10 +16,27 @@ namespace proyecto_final.Controllers
         private DatabaseEntities db = new DatabaseEntities();
 
         // GET: recetavisitas
-        public ActionResult Index()
+        public ActionResult Index(string searchBy, string search)
         {
             var recetavisita = db.recetavisita.Include(r => r.paciente1);
-            return View(recetavisita.ToList());
+            if (searchBy == "fecha")
+            {
+                return View(db.recetavisita.Where(x => x.fecha.Equals(search) || search == null).ToList());
+            }
+            if (searchBy == "medicamentos")
+            {
+                return View(db.recetavisita.Where(x => x.medicamentos.Contains(search) || search == null).ToList());
+            }
+            if (searchBy == "paciente")
+            {
+                return View(db.recetavisita.Where(x => x.paciente.Equals(search) || search == null).ToList());
+            }
+            if (searchBy == "observaciones")
+            {
+                return View(db.recetavisita.Where(x => x.observaciones.Contains(search) || search == null).ToList());
+            }
+
+            else { return View(db.recetavisita.ToList()); }
         }
 
         // GET: recetavisitas/Details/5

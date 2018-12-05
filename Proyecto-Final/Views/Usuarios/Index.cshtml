@@ -4,9 +4,24 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_layout.cshtml";
 }
+<div class="panel panel-default">
+    <div class="panel-heading" style="background:#2C3E50; color:#ffffff;"><h2 style="text-align:center; font-family:Arial; font-weight:700;">Pacientes</h2></div>
+    <div class="form-group ">
+        @using (@Html.BeginForm("Index", "Visitas", FormMethod.Get))
+        {
+            <b>Buscar Por:</b><br /><br />
 
-<h2>Index</h2>
+            @Html.RadioButton("searchBy", "nombre", true, new { @class = "radio-inline" }) <text>caso</text>
+            @Html.RadioButton("searchBy", "clave", new { @class = "radio-inline" }) <text>Costo</text>
+            @Html.RadioButton("searchBy", "tipo", new { @class = "radio-inline" }) <text>paciente</text><br /><br />
+            <div>
 
+                @Html.TextBox("search", "buscar", new { @class = "form-control" })<br />
+                <input type="submit" value="search" class="btn btn-sm form-actions" />
+            </div>
+        }
+    </div>
+</div>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
