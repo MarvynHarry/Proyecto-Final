@@ -9,17 +9,17 @@
         <img src="~/Models/img/medic.jpg" class="img-responsive" />
     </div>
     <div class="row">
-        <div class="col-md-4">
-            <h2>Gestionar de Usuarios</h2>
+        <div class="col-md-6">
+            <h2>Gestionar de Visitas</h2>
             <p>
                 Podrá registrar un evento de visita a un paciente seleccionado, asi como ver las
                 visitas anteriores. Para cada visita se registrarán los campos:
                 Fecha, Motivo, Comentario, Receta de medicamentos, fecha de próxima visita.
 
             </p>
-            <p class="btn btn-primary">@Html.ActionLink("Gestionar Visitas", "Index", "visitas")</p>
+            <p class="btn btn-success">@Html.ActionLink("Gestionar Visitas", "Index", "visitas")</p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <h2>Citas</h2>
             <p>
                 El medico puede definir una fecha para consulta (cita) próxima.
@@ -27,20 +27,6 @@
 
 
             </p>
-            <p class="btn btn-primary">@Html.ActionLink("Geationar Cita", "Index", "citas2")</p>
-        </div>
-        <div class="col-md-4">
-            <h2>Reportes</h2>
-            <p>
-                Reporte de cumpleaños por mes, donde saldrá el nombre, apellido, fecha y
-                teléfono
-                de los pacientes que cumplen años en un mes seleccionado..
-            </p>
-            <p><a class="btn btn-default" href="#">Citas &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Calendario</h2>
-            <p>Puede consultar el calendario de citas</p>
-            <p class="btn btn-info">@Html.ActionLink("Calendario", "Index", "Calendar")</p>
+            <p class="btn btn-success">@Html.ActionLink("Geationar Cita", "Index", "citas2")</p>
         </div>
     </div>
