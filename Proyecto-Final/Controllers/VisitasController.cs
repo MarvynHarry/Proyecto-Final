@@ -10,37 +10,50 @@ using proyecto_final.Models;
 
 namespace proyecto_final.Controllers
 {
-    public class VisitasController : Controller
+    public class visitasController : Controller
     {
         private DatabaseEntities db = new DatabaseEntities();
 
-        // GET: Visitas
+
+        // GET: visitas
         public ActionResult Index(string searchBy, string search)
         {
-            if (searchBy == "caso")
-            {
-                return View(db.Visita.Where(x => x.caso.Contains(search) || search == null).ToList());
-            }
-            if (searchBy == "costo")
-            {
-                return View(db.Visita.Where(x => x.costo.Equals(search) || search == null).ToList());
-            }
             if (searchBy == "paciente")
             {
-                return View(db.Visita.Where(x => x.paciente.Equals(search) || search == null).ToList());
+                return View(db.visita.Where(x => x.paciente.ToString().Contains(search) || search == null).ToList());
+            }
+            if (searchBy == "fecha")
+            {
+                return View(db.visita.Where(x => x.fecha.ToString().Contains(search) || search == null).ToList());
+            }
+            if (searchBy == "proxima")
+            {
+                return View(db.visita.Where(x => x.proxima.ToString().Contains(search) || search == null).ToList());
+            }
+            if (searchBy == "motivo")
+            {
+                return View(db.visita.Where(x => x.motivo.ToString().Contains(search) || search == null).ToList());
+            }
+            if (searchBy == "comentario")
+            {
+                return View(db.visita.Where(x => x.comentario.ToString().Contains(search) || search == null).ToList());
+            }
+            if (searchBy == "receta")
+            {
+                return View(db.visita.Where(x => x.receta.ToString().Contains(search) || search == null).ToList());
             }
 
-            else { return View(db.Visita.ToList()); }
+            else { return View(db.visita.ToList()); }
         }
 
-        // GET: Visitas/Details/5
+        // GET: visitas/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Visita visita = db.Visita.Find(id);
+            visita visita = db.visitas.Find(id);
             if (visita == null)
             {
                 return HttpNotFound();
@@ -48,53 +61,51 @@ namespace proyecto_final.Controllers
             return View(visita);
         }
 
-        // GET: Visitas/Create
+        // GET: visitas/Create
         public ActionResult Create()
         {
             ViewBag.paciente = new SelectList(db.paciente, "cedula", "nombre");
             return View();
         }
 
-        // POST: Visitas/Create
+        // POST: visitas/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,paciente,caso,Procedimientos,Inicio,Fin,Prioridad,costo")] Visita visita)
+        public ActionResult Create([Bind(Include = "Id,paciente,fecha,proxima,motivo,comentario,receta")] visita visita)
         {
             if (ModelState.IsValid)
             {
-                db.Visita.Add(visita);
+                db.visitas.Add(visita);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.paciente = new SelectList(db.paciente, "cedula", "nombre", visita.paciente);
             return View(visita);
         }
 
-        // GET: Visitas/Edit/5
+        // GET: visitas/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Visita visita = db.Visita.Find(id);
+            visita visita = db.visitas.Find(id);
             if (visita == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.paciente = new SelectList(db.paciente, "cedula", "nombre", visita.paciente);
             return View(visita);
         }
 
-        // POST: Visitas/Edit/5
+        // POST: visitas/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,paciente,caso,Procedimientos,Inicio,Fin,Prioridad,costo")] Visita visita)
+        public ActionResult Edit([Bind(Include = "Id,paciente,fecha,proxima,motivo,comentario,receta")] visita visita)
         {
             if (ModelState.IsValid)
             {
@@ -102,18 +113,17 @@ namespace proyecto_final.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.paciente = new SelectList(db.paciente, "cedula", "nombre", visita.paciente);
             return View(visita);
         }
 
-        // GET: Visitas/Delete/5
+        // GET: visitas/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Visita visita = db.Visita.Find(id);
+            visita visita = db.visitas.Find(id);
             if (visita == null)
             {
                 return HttpNotFound();
@@ -121,13 +131,13 @@ namespace proyecto_final.Controllers
             return View(visita);
         }
 
-        // POST: Visitas/Delete/5
+        // POST: visitas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Visita visita = db.Visita.Find(id);
-            db.Visita.Remove(visita);
+            visita visita = db.visitas.Find(id);
+            db.visitas.Remove(visita);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

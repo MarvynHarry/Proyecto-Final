@@ -35,7 +35,6 @@
     <NavigationProperty Name="pago_consulta" Relationship="Self.FK__pago_cons__idpac__5165187F" FromRole="paciente" ToRole="pago_consulta" />
     <NavigationProperty Name="recetacita" Relationship="Self.FK__recetacit__pacie__2739D489" FromRole="paciente" ToRole="recetacita" />
     <NavigationProperty Name="recetavisita" Relationship="Self.FK__recetavis__pacie__2180FB33" FromRole="paciente" ToRole="recetavisita" />
-    <NavigationProperty Name="Visita" Relationship="Self.FK__Visita__paciente__19AACF41" FromRole="paciente" ToRole="Visita" />
   </EntityType>
   <EntityType Name="pago_consulta">
     <Key>
@@ -86,20 +85,6 @@
     <Property Name="tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="pago_consulta" Relationship="Self.FK__pago_cons__recib__534D60F1" FromRole="Usuarios" ToRole="pago_consulta" />
   </EntityType>
-  <EntityType Name="Visita">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="paciente" Type="Int64" Nullable="false" />
-    <Property Name="caso" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Procedimientos" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-    <Property Name="Inicio" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Fin" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Prioridad" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="costo" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-    <NavigationProperty Name="paciente1" Relationship="Self.FK__Visita__paciente__19AACF41" FromRole="Visita" ToRole="paciente" />
-  </EntityType>
   <Association Name="FK__cita__cedula__382F5661">
     <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
     <End Role="cita" Type="Self.cita" Multiplicity="*" />
@@ -148,18 +133,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Visita__paciente__19AACF41">
-    <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
-    <End Role="Visita" Type="Self.Visita" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="paciente">
-        <PropertyRef Name="cedula" />
-      </Principal>
-      <Dependent Role="Visita">
-        <PropertyRef Name="paciente" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__pago_cons__recib__534D60F1">
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
     <End Role="pago_consulta" Type="Self.pago_consulta" Multiplicity="*" />
@@ -180,7 +153,6 @@
     <EntitySet Name="recetacita" EntityType="Self.recetacita" />
     <EntitySet Name="recetavisita" EntityType="Self.recetavisita" />
     <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
-    <EntitySet Name="Visita" EntityType="Self.Visita" />
     <AssociationSet Name="FK__cita__cedula__382F5661" Association="Self.FK__cita__cedula__382F5661">
       <End Role="paciente" EntitySet="paciente" />
       <End Role="cita" EntitySet="cita" />
@@ -197,13 +169,22 @@
       <End Role="paciente" EntitySet="paciente" />
       <End Role="recetavisita" EntitySet="recetavisita" />
     </AssociationSet>
-    <AssociationSet Name="FK__Visita__paciente__19AACF41" Association="Self.FK__Visita__paciente__19AACF41">
-      <End Role="paciente" EntitySet="paciente" />
-      <End Role="Visita" EntitySet="Visita" />
-    </AssociationSet>
     <AssociationSet Name="FK__pago_cons__recib__534D60F1" Association="Self.FK__pago_cons__recib__534D60F1">
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="pago_consulta" EntitySet="pago_consulta" />
     </AssociationSet>
+    <EntitySet Name="visita" EntityType="DatabaseModel.visita" />
   </EntityContainer>
+  <EntityType Name="visita">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="paciente" Type="Int64" Nullable="false" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="proxima" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="motivo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="comentario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="receta" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-
 using proyecto_final.Models;
 
 namespace proyecto_final.Controllers
@@ -16,25 +15,25 @@ namespace proyecto_final.Controllers
         private DatabaseEntities db = new DatabaseEntities();
 
         // GET: citas
-        public ActionResult Index( string searchBy, string search, DateTime search1)
+        public ActionResult Index(string searchBy, string search)
         {
             var cita = db.cita.Include(c => c.paciente);
-      
-                if (searchBy == "fecha")
-                {
-                    return View(db.cita.Where(x => x.fecha.Equals(search1) || search1 == null).ToList());
-                }
-                if (searchBy == "costo")
-                {
-                    return View(db.cita.Where(x => x.costo.Equals(search) || search == null).ToList());
-                }
-                if (searchBy == "cedula")
-                {
-                    return View(db.cita.Where(x => x.cedula.Equals(search) || search == null).ToList());
-                }
 
-                else { return View(db.cita.ToList()); }
-            
+            if (searchBy == "fecha")
+            {
+                return View(db.cita.Where(x => x.fecha.ToString().Contains(search) || search == null).ToList());
+            }
+            if (searchBy == "costo")
+            {
+                return View(db.cita.Where(x => x.costo.ToString().Contains(search) || search == null).ToList());
+            }
+            if (searchBy == "cedula")
+            {
+                return View(db.cita.Where(x => x.cedula.ToString().Contains(search) || search == null).ToList());
+            }
+
+            else { return View(db.cita.ToList()); }
+
         }
 
         // GET: citas/Details/5
@@ -64,7 +63,7 @@ namespace proyecto_final.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_cita,cedula,fecha,hora,duracion,costo")] cita cita)
+        public ActionResult Create([Bind(Include = "id_cita,cedula,consulta,fecha,hora,duracion,costo")] cita cita)
         {
             if (ModelState.IsValid)
             {
@@ -98,7 +97,7 @@ namespace proyecto_final.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_cita,cedula,fecha,hora,duracion,costo")] cita cita)
+        public ActionResult Edit([Bind(Include = "id_cita,cedula,consulta,fecha,hora,duracion,costo")] cita cita)
         {
             if (ModelState.IsValid)
             {

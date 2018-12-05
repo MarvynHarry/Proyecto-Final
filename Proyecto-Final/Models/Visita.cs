@@ -12,17 +12,14 @@ namespace proyecto_final.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Visita
+    public partial class visita
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public long paciente { get; set; }
-        public string caso { get; set; }
-        public string Procedimientos { get; set; }
-        public System.DateTime Inicio { get; set; }
-        public System.DateTime Fin { get; set; }
-        public string Prioridad { get; set; }
-        public decimal costo { get; set; }
-    
-        public virtual paciente paciente1 { get; set; }
+        public System.DateTime fecha { get; set; }
+        public System.DateTime proxima { get; set; }
+        public string motivo { get; set; }
+        public string comentario { get; set; }
+        public string receta { get; set; }
     }
 }

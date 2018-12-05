@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-
 using proyecto_final.Models;
 
 namespace proyecto_final.Controllers
@@ -24,7 +23,7 @@ namespace proyecto_final.Controllers
             }
             if (searchBy == "costo")
             {
-                return View(db.consulta.Where(x => x.costo.Equals(search) || search == null).ToList());
+                return View(db.consulta.Where(x => x.costo.ToString().Contains(search) || search == null).ToList());
             }
 
 
@@ -98,7 +97,6 @@ namespace proyecto_final.Controllers
                 return RedirectToAction("Index");
             }
             return View(consulta);
-
         }
 
         // GET: consultas/Delete/5

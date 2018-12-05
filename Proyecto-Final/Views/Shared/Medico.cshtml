@@ -12,11 +12,11 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
+                @Html.ActionLink("Medical Center", "MedicoDashBoard", "Home", null, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="navbar-brand"> Welcome @Session["Nombre"].ToString()</li>
+                    <li class="navbar-brand"> Bienvenido Dr. @Session["Nombre"].ToString()</li>
                     <li>@Html.ActionLink("Cerrar Session", "Logout", "Home")</li>
                 </ul>
             </div>

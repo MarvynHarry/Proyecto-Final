@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-
 using proyecto_final.Models;
 
 namespace proyecto_final.Controllers
@@ -16,7 +15,7 @@ namespace proyecto_final.Controllers
         private DatabaseEntities db = new DatabaseEntities();
 
         // GET: Usuarios
-        public ActionResult Index(string searchBy, string search, string search1)
+        public ActionResult Index(string searchBy, string search)
         {
             if (searchBy == "nombre")
             {
@@ -28,7 +27,7 @@ namespace proyecto_final.Controllers
             }
             if (searchBy == "tipo")
             {
-                return View(db.Usuarios.Where(x => x.tipo.Equals(search1) || search == null).ToList());
+                return View(db.Usuarios.Where(x => x.tipo.ToString().Contains(search) || search == null).ToList());
             }
 
             else { return View(db.Usuarios.ToList()); }

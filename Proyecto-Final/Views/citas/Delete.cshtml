@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/Asistente.cshtml";
+    Layout = "~/Views/Shared/_layout.cshtml";
 }
 
 <h2>Delete</h2>
@@ -12,6 +12,14 @@
     <h4>cita</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.consulta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.consulta)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.fecha)
         </dt>

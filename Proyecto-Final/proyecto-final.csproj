@@ -451,15 +451,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\citas1Controller.cs" />
+    <Compile Include="Controllers\citas2Controller.cs" />
     <Compile Include="Controllers\citasController.cs" />
     <Compile Include="Controllers\consultasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\pacientesController.cs" />
-    <Compile Include="Controllers\recetacitasController.cs" />
-    <Compile Include="Controllers\recetavisitasController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
-    <Compile Include="Controllers\VisitasController.cs" />
+    <Compile Include="Controllers\visitasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -469,7 +468,6 @@
     <Compile Include="Models\consulta.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MetodosPac.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -485,12 +483,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Obligatorio.cs" />
     <Compile Include="Models\paciente.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PacienteDao.cs" />
-    <Compile Include="Models\PacienteNeg.cs" />
     <Compile Include="Models\pago_consulta.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -503,7 +498,7 @@
     <Compile Include="Models\Usuarios.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Visita.cs">
+    <Compile Include="Models\visita.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1052,11 +1047,7 @@
     <Content Include="Views\Shared\Medico.cshtml" />
     <Content Include="Views\Calendar\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\pacientes\Create.cshtml" />
-    <Content Include="Views\pacientes\Delete.cshtml" />
-    <Content Include="Views\pacientes\Details.cshtml" />
-    <Content Include="Views\pacientes\Edit.cshtml" />
-    <Content Include="Views\pacientes\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Usuarios\Create.cshtml" />
     <Content Include="Views\Usuarios\Delete.cshtml" />
     <Content Include="Views\Usuarios\Details.cshtml" />
@@ -1072,23 +1063,26 @@
     <Content Include="Views\consultas\Details.cshtml" />
     <Content Include="Views\consultas\Edit.cshtml" />
     <Content Include="Views\consultas\Index.cshtml" />
-    <Content Include="Views\recetacitas\Create.cshtml" />
-    <Content Include="Views\recetacitas\Delete.cshtml" />
-    <Content Include="Views\recetacitas\Details.cshtml" />
-    <Content Include="Views\recetacitas\Edit.cshtml" />
-    <Content Include="Views\recetacitas\Index.cshtml" />
-    <Content Include="Views\recetavisitas\Create.cshtml" />
-    <Content Include="Views\recetavisitas\Delete.cshtml" />
-    <Content Include="Views\recetavisitas\Details.cshtml" />
-    <Content Include="Views\recetavisitas\Edit.cshtml" />
-    <Content Include="Views\recetavisitas\Index.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\pacientes\Find.cshtml" />
-    <Content Include="Views\Visitas\Create.cshtml" />
-    <Content Include="Views\Visitas\Delete.cshtml" />
-    <Content Include="Views\Visitas\Details.cshtml" />
-    <Content Include="Views\Visitas\Edit.cshtml" />
-    <Content Include="Views\Visitas\Index.cshtml" />
+    <Content Include="Views\pacientes\Create.cshtml" />
+    <Content Include="Views\pacientes\Delete.cshtml" />
+    <Content Include="Views\pacientes\Details.cshtml" />
+    <Content Include="Views\pacientes\Edit.cshtml" />
+    <Content Include="Views\pacientes\Index.cshtml" />
+    <Content Include="Views\citas1\Create.cshtml" />
+    <Content Include="Views\citas1\Delete.cshtml" />
+    <Content Include="Views\citas1\Details.cshtml" />
+    <Content Include="Views\citas1\Edit.cshtml" />
+    <Content Include="Views\citas1\Index.cshtml" />
+    <Content Include="Views\citas2\Create.cshtml" />
+    <Content Include="Views\citas2\Delete.cshtml" />
+    <Content Include="Views\citas2\Details.cshtml" />
+    <Content Include="Views\citas2\Edit.cshtml" />
+    <Content Include="Views\citas2\Index.cshtml" />
+    <Content Include="Views\visitas\Create.cshtml" />
+    <Content Include="Views\visitas\Delete.cshtml" />
+    <Content Include="Views\visitas\Details.cshtml" />
+    <Content Include="Views\visitas\Edit.cshtml" />
+    <Content Include="Views\visitas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

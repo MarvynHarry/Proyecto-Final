@@ -28,15 +28,15 @@
                             @ViewBag.Message
                         </div>
                     }
-                    <div class="input-field">
-                        @Html.LabelFor(a => a.Nombre)
-                        @Html.TextBoxFor(a => a.Nombre)
-                        @Html.ValidationMessageFor(a => a.Nombre)
-                    </div>
+                        <div class="input-field">
+                            @Html.LabelFor(a => a.Nombre)
+                            @Html.TextBoxFor(a => a.Nombre)
+                            @Html.ValidationMessageFor(a => a.Nombre, "se requiere un nombre de usuario", new { @class = "text-danger" })
+                        </div>
                     <div class="input-field">
                         @Html.LabelFor(a => a.clave)
                         @Html.PasswordFor(a => a.clave)
-                        @Html.ValidationMessageFor(a => a.clave)
+                        @Html.ValidationMessageFor(a => a.clave, "se requiere una clave en este campo", new { @class = "text-danger" })
                     </div>
                     <div class="input-field">
                         <input type="submit" value="Login" class="btn #1976d2 blue darken-2" />

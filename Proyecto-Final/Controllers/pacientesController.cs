@@ -1,27 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Model.Neg;
 using proyecto_final.Models;
-using proyecto_final.Neg;
-using System.Net;
 
 namespace proyecto_final.Controllers
 {
     public class pacientesController : Controller
     {
-        PacienteNeg objClienteNeg;
-        public pacientesController()
-        {
-      
-        }
-
-
         private DatabaseEntities db = new DatabaseEntities();
-
-
 
         // GET: pacientes
         public ActionResult Index(string searchBy, string search)
@@ -30,19 +21,21 @@ namespace proyecto_final.Controllers
             {
                 return View(db.paciente.Where(x => x.nombre.Contains(search) || search == null).ToList());
             }
-           if (searchBy == "apellido")
+            if (searchBy == "apellido")
             {
                 return View(db.paciente.Where(x => x.apellido.Contains(search) || search == null).ToList());
             }
-           if (searchBy == "sangre")
+            if (searchBy == "sangre")
             {
                 return View(db.paciente.Where(x => x.tipo_sangre.Contains(search) || search == null).ToList());
             }
- 
+            if (searchBy == "cedula")
+            {
+                return View(db.paciente.Where(x => x.cedula.ToString().Contains(search) || search == null).ToList());
+            }
+
             else { return View(db.paciente.ToList()); }
         }
-        
-
 
         // GET: pacientes/Details/5
         public ActionResult Details(long? id)
@@ -147,67 +140,5 @@ namespace proyecto_final.Controllers
             }
             base.Dispose(disposing);
         }
-
-
-
-
-
-
-
-
-
-        public ActionResult Find(long cedula)
-        {
-            paciente objProducto = new paciente(cedula);
-            objClienteNeg.find(objProducto);
-            //objClienteNeg.find2(objCliente);
-            return View(objProducto);
-        }
-
-        [HttpGet]
-        public ActionResult BuscarPacientes()
-        {
-            return View(db.paciente.ToList());
-
-        }
-        [HttpPost]
-        public ActionResult BuscarPacientes(long txtpaciente, string txtnombre, string ListaCategorias)
-        {
-
-            if (txtnombre == "")
-            {
-                txtnombre = "-1";
-            }
-            if (txtpaciente == 0)
-            {
-                txtpaciente = -1;
-            }
-            if (ListaCategorias == "")
-            {
-                ListaCategorias = "-1";
-            }
-
-      
-
-            paciente objProducto = new paciente();
-            objProducto.nombre = txtnombre;
-            objProducto.cedula = txtpaciente;
-            objProducto.tipo_sangre = ListaCategorias;
-
-            List<paciente> paciente = objClienteNeg.findAllClientes(objProducto);
-            
-            return View(paciente);
-        }
-
-        public void mensajeErrorServidor(paciente objProducto)
-        {
-            switch (objProducto.Estado)
-            {
-                case 1000:
-                    ViewBag.MensajeError = "ERROR DE SERVIDOR DE SQL SERVER";
-                    break;
-            }
-        }
-
     }
 }

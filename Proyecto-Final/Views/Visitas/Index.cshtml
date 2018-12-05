@@ -1,4 +1,4 @@
-﻿@model IEnumerable<proyecto_final.Models.Visita>
+﻿@model IEnumerable<proyecto_final.Models.visita>
 
 @{
     ViewBag.Title = "Index";
@@ -6,15 +6,18 @@
 }
 
 <div class="panel panel-default">
-    <div class="panel-heading" style="background:#2C3E50; color:#ffffff;"><h2 style="text-align:center; font-family:Arial; font-weight:700;">Pacientes</h2></div>
+    <div class="panel-heading" style="background:#2C3E50; color:#ffffff;"><h2 style="text-align:center; font-family:Arial; font-weight:700;">Visitas</h2></div>
     <div class="form-group ">
-        @using (@Html.BeginForm("Index", "Visitas", FormMethod.Get))
+        @using (@Html.BeginForm("Index", "visitas", FormMethod.Get))
         {
             <b>Buscar Por:</b><br /><br />
 
-            @Html.RadioButton("searchBy", "caso", true, new { @class = "radio-inline" }) <text>caso</text>
-            @Html.RadioButton("searchBy", "costo", new { @class = "radio-inline" }) <text>Costo</text>
-            @Html.RadioButton("searchBy", "paciente", new { @class = "radio-inline" }) <text>paciente</text><br /><br />
+            @Html.RadioButton("searchBy", "paciente", true, new { @class = "radio-inline" }) <text>paciente</text>
+            @Html.RadioButton("searchBy", "fecha", new { @class = "radio-inline" }) <text>fecha</text>   
+            @Html.RadioButton("searchBy", "proxima", true, new { @class = "radio-inline" }) <text>proxima</text>
+            @Html.RadioButton("searchBy", "motivo", new { @class = "radio-inline" }) <text>motivo</text>   
+            @Html.RadioButton("searchBy", "comentario", true, new { @class = "radio-inline" }) <text>comentario</text>
+            @Html.RadioButton("searchBy", "receta", new { @class = "radio-inline" }) <text>receta</text>
             <div>
 
                 @Html.TextBox("search", "buscar", new { @class = "form-control" })<br />
@@ -33,26 +36,18 @@
             @Html.DisplayNameFor(model => model.paciente)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.caso)
+            @Html.DisplayNameFor(model => model.fecha)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Procedimientos)
+            @Html.DisplayNameFor(model => model.proxima)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Inicio)
+            @Html.DisplayNameFor(model => model.motivo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Fin)
+            @Html.DisplayNameFor(model => model.comentario)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Prioridad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.costo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.paciente1.nombre)
-        </th>
+
         <th></th>
     </tr>
 
@@ -62,30 +57,22 @@
             @Html.DisplayFor(modelItem => item.paciente)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.caso)
+            @Html.DisplayFor(modelItem => item.fecha)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Procedimientos)
+            @Html.DisplayFor(modelItem => item.proxima)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Inicio)
+            @Html.DisplayFor(modelItem => item.motivo)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Fin)
+            @Html.DisplayFor(modelItem => item.comentario)
         </td>
+
         <td>
-            @Html.DisplayFor(modelItem => item.Prioridad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.costo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.paciente1.nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Imprimir", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

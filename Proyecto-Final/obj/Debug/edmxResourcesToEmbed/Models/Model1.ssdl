@@ -75,18 +75,17 @@
     <Property Name="clave" Type="varchar" MaxLength="25" />
     <Property Name="tipo" Type="varchar" MaxLength="10" />
   </EntityType>
-  <EntityType Name="Visita">
+  <EntityType Name="visita">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="paciente" Type="bigint" Nullable="false" />
-    <Property Name="caso" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="Procedimientos" Type="nvarchar" MaxLength="300" />
-    <Property Name="Inicio" Type="datetime" Nullable="false" />
-    <Property Name="Fin" Type="datetime" Nullable="false" />
-    <Property Name="Prioridad" Type="nvarchar" MaxLength="10" />
-    <Property Name="costo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="fecha" Type="datetime" Nullable="false" />
+    <Property Name="proxima" Type="datetime" Nullable="false" />
+    <Property Name="motivo" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="comentario" Type="varchar" MaxLength="200" />
+    <Property Name="receta" Type="varchar" MaxLength="200" Nullable="false" />
   </EntityType>
   <Association Name="FK__cita__cedula__382F5661">
     <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
@@ -154,18 +153,9 @@ advertencia 6035: La relación 'FK__cita__costo__3A179ED3' tiene columnas que no
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Visita__paciente__19AACF41">
-    <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
-    <End Role="Visita" Type="Self.Visita" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="paciente">
-        <PropertyRef Name="cedula" />
-      </Principal>
-      <Dependent Role="Visita">
-        <PropertyRef Name="paciente" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__visita__paciente__67DE6983' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__visita__paciente__67DE6983" />-->
   <EntityContainer Name="DatabaseModelStoreContainer">
     <EntitySet Name="cita" EntityType="Self.cita" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="consulta" EntityType="Self.consulta" Schema="dbo" store:Type="Tables" />
@@ -174,7 +164,7 @@ advertencia 6035: La relación 'FK__cita__costo__3A179ED3' tiene columnas que no
     <EntitySet Name="recetacita" EntityType="Self.recetacita" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="recetavisita" EntityType="Self.recetavisita" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Visita" EntityType="Self.Visita" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="visita" EntityType="Self.visita" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__cita__cedula__382F5661" Association="Self.FK__cita__cedula__382F5661">
       <End Role="paciente" EntitySet="paciente" />
       <End Role="cita" EntitySet="cita" />
@@ -194,10 +184,6 @@ advertencia 6035: La relación 'FK__cita__costo__3A179ED3' tiene columnas que no
     <AssociationSet Name="FK__recetavis__pacie__2180FB33" Association="Self.FK__recetavis__pacie__2180FB33">
       <End Role="paciente" EntitySet="paciente" />
       <End Role="recetavisita" EntitySet="recetavisita" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Visita__paciente__19AACF41" Association="Self.FK__Visita__paciente__19AACF41">
-      <End Role="paciente" EntitySet="paciente" />
-      <End Role="Visita" EntitySet="Visita" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

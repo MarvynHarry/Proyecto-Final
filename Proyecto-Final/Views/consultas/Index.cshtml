@@ -4,20 +4,19 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_layout.cshtml";
 }
-
 <div class="panel panel-default">
     <div class="panel-heading" style="background:#2C3E50; color:#ffffff;"><h2 style="text-align:center; font-family:Arial; font-weight:700;">Consultas</h2></div>
     <div class="form-group ">
-        @using (@Html.BeginForm("Index", "Visitas", FormMethod.Get))
+        @using (@Html.BeginForm("Index", "consultas", FormMethod.Get))
         {
             <b>Buscar Por:</b><br /><br />
 
             @Html.RadioButton("searchBy", "area", true, new { @class = "radio-inline" }) <text>Area</text>
             @Html.RadioButton("searchBy", "costo", new { @class = "radio-inline" }) <text>Costo</text>
-           <br /><br />
+            <br /><br />
             <div>
 
-                @Html.TextBox("search", "buscar", new { @class = "form-control" })<br />
+                @Html.TextBox("search", "", new { @class = "form-control" })<br />
                 <input type="submit" value="search" class="btn btn-sm form-actions" />
             </div>
         }
@@ -38,20 +37,21 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.area)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.costo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.area)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.costo)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>

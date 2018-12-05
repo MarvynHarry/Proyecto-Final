@@ -12,8 +12,7 @@ namespace proyecto_final.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.SqlClient;
-
+    
     public partial class DatabaseEntities : DbContext
     {
         public DatabaseEntities()
@@ -33,31 +32,8 @@ namespace proyecto_final.Models
         public virtual DbSet<recetacita> recetacita { get; set; }
         public virtual DbSet<recetavisita> recetavisita { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
-        public virtual DbSet<Visita> Visita { get; set; }
+        public virtual DbSet<visita> visita { get; set; }
 
-        private static DatabaseEntities objConexionDB = null;
-        private SqlConnection con;
-
-
-
-        public static DatabaseEntities saberEstado()
-        {
-            if (objConexionDB == null)
-            {
-                objConexionDB = new DatabaseEntities();
-
-            }
-            return objConexionDB;
-        }
-
-        public SqlConnection getCon()
-        {
-            return con;
-        }
-
-        public void closeDB()
-        {
-            objConexionDB = null;
-        }
+        public System.Data.Entity.DbSet<proyecto_final.Models.visita> visitas { get; set; }
     }
 }
