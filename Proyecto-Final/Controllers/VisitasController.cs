@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-
 using proyecto_final.Models;
 
 namespace proyecto_final.Controllers
@@ -49,7 +48,7 @@ namespace proyecto_final.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,paciente,caso,Procedimientos,Inicio,Fin,Prioridad,costo,StatusENUM")] Visita visita)
+        public ActionResult Create([Bind(Include = "id,paciente,caso,Procedimientos,Inicio,Fin,Prioridad,costo")] Visita visita)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +82,7 @@ namespace proyecto_final.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,paciente,caso,Procedimientos,Inicio,Fin,Prioridad,costo,StatusENUM")] Visita visita)
+        public ActionResult Edit([Bind(Include = "id,paciente,caso,Procedimientos,Inicio,Fin,Prioridad,costo")] Visita visita)
         {
             if (ModelState.IsValid)
             {

@@ -1,83 +1,70 @@
 ﻿@model IEnumerable<proyecto_final.Models.Visita>
 
 @{
-    Layout = null;
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Medico.cshtml";
 }
 
-<!DOCTYPE html>
+<h2>Index</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.caso)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Procedimientos)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Inicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Prioridad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.costo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StatusENUM)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.paciente1.nombre)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.caso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Procedimientos)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Inicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prioridad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.costo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StatusENUM)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.paciente1.nombre)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.id })
-            </td>
-        </tr>
-    }
-    
-    </table>
-</body>
-</html>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.caso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Procedimientos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Inicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prioridad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.costo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.paciente1.nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.caso)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Procedimientos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Inicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prioridad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.costo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.paciente1.nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

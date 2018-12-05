@@ -1051,11 +1051,6 @@
     <Content Include="Views\Shared\Medico.cshtml" />
     <Content Include="Views\Calendar\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Visitas\Create.cshtml" />
-    <Content Include="Views\Visitas\Delete.cshtml" />
-    <Content Include="Views\Visitas\Details.cshtml" />
-    <Content Include="Views\Visitas\Edit.cshtml" />
-    <Content Include="Views\Visitas\Index.cshtml" />
     <Content Include="Views\pacientes\Create.cshtml" />
     <Content Include="Views\pacientes\Delete.cshtml" />
     <Content Include="Views\pacientes\Details.cshtml" />
@@ -1088,6 +1083,11 @@
     <Content Include="Views\recetavisitas\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\pacientes\Find.cshtml" />
+    <Content Include="Views\Visitas\Create.cshtml" />
+    <Content Include="Views\Visitas\Delete.cshtml" />
+    <Content Include="Views\Visitas\Details.cshtml" />
+    <Content Include="Views\Visitas\Edit.cshtml" />
+    <Content Include="Views\Visitas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
