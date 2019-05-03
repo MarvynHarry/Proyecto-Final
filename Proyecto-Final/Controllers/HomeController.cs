@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using CrystalDecisions.CrystalReports.Engine;
 using proyecto_final.Models;
 
 namespace proyecto_final.Controllers
@@ -110,6 +111,29 @@ namespace proyecto_final.Controllers
             Session.Abandon();
             Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
             return View("Login");
+        }
+
+
+
+        public ActionResult exportReport()
+        {
+            DatabaseEntities db = new DatabaseEntities();
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "CrystalReport1.rpt"));
+            rd.SetDataSource(db.Usuarios.ToList());
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            try
+            {
+                Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                stream.Seek(0, SeekOrigin.Begin);
+                return File(stream, "application/pdf", "Usuarios.pdf");
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }
